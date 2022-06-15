@@ -1,4 +1,10 @@
 # AlkeParking - Questões
+```
+Feito por:
+
+Douglas Biagi Grana
+Luiz Henrique Lage da Silva
+```
 
 ## Exercicio 1
 
