@@ -35,7 +35,7 @@ struct Vehicle: Parkable, Hashable {
     let checkInTime: Date
     let discountCard: String?
     var parkedTime: Int {
-            Calendar.current.dateComponents([.minute], from: checkInTime, to: Date()).minute ?? 0
+        get {Calendar.current.dateComponents([.minute], from: checkInTime, to: Date()).minute ?? 0}
     }
     
     func hash(into hasher: inout Hasher) {
@@ -114,7 +114,7 @@ extension Parking {
     func getEarlierDate(minutes: Int) -> Date {
         let earlyDate = Calendar.current.date(
           byAdding: .minute,
-          value: minutes,
+          value: -minutes,
           to: Date()) ?? Date()
         return earlyDate
     }
@@ -131,30 +131,41 @@ extension Parking {
 }
 
 //MARK: - TESTES
-var alkeParking = Parking(maxVehicles: 5)
+var alkeParking = Parking(maxVehicles: 15)
 
+//print(alkeParking.getEarlierDate(minutes: 5))
 var allVehicles: [Vehicle] =  [
-    Vehicle(plate: "AA111AA", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 120), discountCard: "DISCOUNT_CARD_001"),
-    Vehicle(plate: "BB111BB", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 119), discountCard: "DISCOUNT_CARD_002"),
-    Vehicle(plate: "CC111CC", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 193), discountCard: "DISCOUNT_CARD_003"),
-    Vehicle(plate: "DD111DD", type: VehicleType.bus, checkInTime: alkeParking.getEarlierDate(minutes: 198), discountCard: nil),
-    Vehicle(plate: "EE111EE", type: VehicleType.motorcycle, checkInTime: alkeParking.getEarlierDate(minutes: 210), discountCard: nil),
-    Vehicle(plate: "FF111FF", type: VehicleType.motorcycle, checkInTime: alkeParking.getEarlierDate(minutes: 20), discountCard: nil),
-    Vehicle(plate: "GG111GG", type: VehicleType.miniBus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_004"),
-    Vehicle(plate: "HH111HH", type: VehicleType.bus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_005"),
-    Vehicle(plate: "II111II", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
-    Vehicle(plate: "JJ111JJ", type: VehicleType.motorcycle, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
-    Vehicle(plate: "KK111KK", type: VehicleType.miniBus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
-    Vehicle(plate: "LL111LL", type: VehicleType.bus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_006"),
-    Vehicle(plate: "MM111MM", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_007"),
-    Vehicle(plate: "NN111NN", type: VehicleType.bus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
-    Vehicle(plate: "OO111OO", type: VehicleType.bus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
-    Vehicle(plate: "PP111PP", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
-    Vehicle(plate: "QQ111QQ", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_008"),
-    Vehicle(plate: "RR111RR", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_009"),
-    Vehicle(plate: "SS111SS", type: VehicleType.motorcycle, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
-    Vehicle(plate: "TT111TT", type: VehicleType.motorcycle, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_010"),
-    Vehicle(plate: "UU111UU", type: VehicleType.miniBus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_011")
+    
+    //test_tax_calc
+    Vehicle(plate: "AA111AA", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 46), discountCard: nil),
+    Vehicle(plate: "AA111AB", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 120), discountCard: nil),
+    Vehicle(plate: "AA111AC", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 193), discountCard: nil),
+    Vehicle(plate: "AA111AD", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 198), discountCard: nil),
+    Vehicle(plate: "AA111AE", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 210), discountCard: nil),
+    
+    
+    // Run Random Cases
+//    Vehicle(plate: "AA111AA", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 193), discountCard: nil),
+//    Vehicle(plate: "BB111BB", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 119), discountCard: "DISCOUNT_CARD_002"),
+//    Vehicle(plate: "CC111CC", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 194), discountCard: nil),
+//    Vehicle(plate: "DD111DD", type: VehicleType.bus, checkInTime: alkeParking.getEarlierDate(minutes: 198), discountCard: nil),
+//    Vehicle(plate: "EE111EE", type: VehicleType.motorcycle, checkInTime: alkeParking.getEarlierDate(minutes: 210), discountCard: nil),
+//    Vehicle(plate: "FF111FF", type: VehicleType.motorcycle, checkInTime: alkeParking.getEarlierDate(minutes: 20), discountCard: nil),
+//    Vehicle(plate: "GG111GG", type: VehicleType.miniBus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_004"),
+//    Vehicle(plate: "HH111HH", type: VehicleType.bus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_005"),
+//    Vehicle(plate: "II111II", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
+//    Vehicle(plate: "JJ111JJ", type: VehicleType.motorcycle, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
+//    Vehicle(plate: "KK111KK", type: VehicleType.miniBus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
+//    Vehicle(plate: "LL111LL", type: VehicleType.bus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_006"),
+//    Vehicle(plate: "MM111MM", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_007"),
+//    Vehicle(plate: "NN111NN", type: VehicleType.bus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
+//    Vehicle(plate: "OO111OO", type: VehicleType.bus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
+//    Vehicle(plate: "PP111PP", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
+//    Vehicle(plate: "QQ111QQ", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_008"),
+//    Vehicle(plate: "RR111RR", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_009"),
+//    Vehicle(plate: "SS111SS", type: VehicleType.motorcycle, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: nil),
+//    Vehicle(plate: "TT111TT", type: VehicleType.motorcycle, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_010"),
+//    Vehicle(plate: "UU111UU", type: VehicleType.miniBus, checkInTime: alkeParking.getEarlierDate(minutes: 10), discountCard: "DISCOUNT_CARD_011")
 ]
 
 var onFinish = { vehicleInserted in
