@@ -131,7 +131,7 @@ extension Parking {
 }
 
 //MARK: - TESTES
-var alkeParking = Parking(maxVehicles: 5)
+var alkeParking = Parking(maxVehicles: 20)
 
 var allVehicles: [Vehicle] =  [
     Vehicle(plate: "AA111AA", type: VehicleType.car, checkInTime: alkeParking.getEarlierDate(minutes: 120), discountCard: "DISCOUNT_CARD_001"),
