@@ -35,7 +35,7 @@ struct Vehicle: Parkable, Hashable {
     let checkInTime: Date
     let discountCard: String?
     var parkedTime: Int {
-            get Calendar.current.dateComponents([.minute], from: checkInTime, to: Date()).minute ?? 0
+        Calendar.current.dateComponents([.minute], from: checkInTime, to: Date()).minute ?? 0
     }
     
     func hash(into hasher: inout Hasher) {
