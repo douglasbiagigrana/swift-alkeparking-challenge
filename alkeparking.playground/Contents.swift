@@ -35,7 +35,7 @@ struct Vehicle: Parkable, Hashable {
     let checkInTime: Date
     let discountCard: String?
     var parkedTime: Int {
-            Calendar.current.dateComponents([.minute], from: checkInTime, to: Date()).minute ?? 0
+            get Calendar.current.dateComponents([.minute], from: checkInTime, to: Date()).minute ?? 0
     }
     
     func hash(into hasher: inout Hasher) {
@@ -114,7 +114,7 @@ extension Parking {
     func getEarlierDate(minutes: Int) -> Date {
         let earlyDate = Calendar.current.date(
           byAdding: .minute,
-          value: minutes,
+          value: -minutes,
           to: Date()) ?? Date()
         return earlyDate
     }
